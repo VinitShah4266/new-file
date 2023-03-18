@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url(/static/images/bg-01.jpg);">
+	<h2 class="ltext-105 cl0 txt-center">
+		wishList
+	</h2>
+</section>
+{% if not wishlist|length == 0 %}
+<!-- Shoping Cart -->
+<form class="bg0 p-t-75 p-b-85">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50">
+				<div class="m-l-25 m-r--38 m-lr-0-xl">
+					<div class="wrap-table-shopping-cart">
+						<table class="table-shopping-cart">
+							<tr class="table_head">
+								<th class="column-1">Product</th>
+								<th class="column-2"></th>
+								<th class="column-3">Price</th>
+								<th class="column-5"></th>
+								<th class="column-5"></th>
+							</tr>
+							{% for i in wishlist %}
+							<tr class="table_row">
+								<td class="column-1">
+									<div class="how-itemcart1">
+										<img src="{{i.product.image.url}}" alt="IMG" style="height: 80px; width: 60px;">
+									</div>
+								</td>
+								<td class="column-2">{{i.product.title}}</td>
+								<td class="column-3">₹{{i.product.price}}</td>
+								</td>
+								<td>
+									<div style="text-align: center;">
+										<a href="#" class="column-2">
+											Add to Cart </a>
+									</div>
+								<td>
+									<div style="text-align: center;">
+										<a href="{% url 'delete_wishlist_item' pk=i.product.pk %}" class="column-2">
+											Delete item </a>
+									</div>
+								</td>
+							</tr>
+							{% endfor %}
+						</table>
+					</div>
+
+					<div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
+						<div class="flex-w flex-m m-r-20 m-tb-5">
+							<div
+								class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
+								<a href="{% url 'clear_wishlist' %}" class="column-2">
+									Clear Wishlist
+								</a>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+</form>
+{% else %}
+<center>
+	<br><br><br><br><br>
+
+	<h3>WishList is Empty</h3>
+	<hr>
+	<br><br><br>
+	
+	<div>
+		<a href="{% url 'home' %}" class="column-2">
+			Continue Shopping
+	<br><br><br>
+		</a>
+	</div>
+	<hr>
+	<br><br><br><br><br>
+
+
+</center>
+
+{% endif %}
+
+{% endblock content %}
